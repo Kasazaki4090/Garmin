@@ -1,0 +1,13 @@
+<settings>
+    <setting propertyKey="@Properties.ThemeCode" title="@Strings.ThemeCodeLabel" prompt="@Strings.ThemeCodePrompt" type="string">
+    </setting>
+
+    <setting propertyKey="@Properties.PresetTheme" title="@Strings.PresetThemeLabel" type="list">
+        <listConfig type="number">
+            <listEntry value="0">@Strings.PresetTheme0</listEntry>
+            <listEntry value="1">@Strings.PresetTheme1</listEntry>
+            <listEntry value="2">@Strings.PresetTheme2</listEntry>
+            <listEntry value="3">@Strings.PresetTheme3</listEntry>
+        </listConfig>
+    </setting>
+</settings>

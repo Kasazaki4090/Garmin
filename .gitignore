@@ -1,0 +1,22 @@
+# Garmin Connect IQ Build Artifacts
+bin/
+*.prg
+*.iq
+
+# Private Developer Key (Never commit private keys!)
+*.der
+*.pem
+developer_key.der
+
+# SDK & Local Tools
+tools/
+*.zip
+
+# VS Code & IDE files
+.vscode/*
+!.vscode/settings.json
+
+# OS Generated
+Thumbs.db
+[Dd]esktop.ini
+.DS_Store

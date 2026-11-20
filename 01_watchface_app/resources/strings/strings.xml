@@ -1,0 +1,13 @@
+<resources>
+    <string id="AppName">WaTime 和色时光</string>
+    <string id="ThemeCodeLabel">主题短码 (从调色器网页粘贴)</string>
+    <string id="ThemeCodePrompt">例如: F2-B0-A0-F3F3F2-1C1C1C-B7282E-787878-9EA1A3-524E4D-B7282E</string>
+    <string id="PresetThemeLabel">预设主题风格</string>
+    <string id="PresetTheme0">昼·壱 (白练 · 茜素)</string>
+    <string id="PresetTheme1">昼·弐 (鸟之子 · 青磁)</string>
+    <string id="PresetTheme2">夜·壱 (胜色 · 樱月)</string>
+    <string id="PresetTheme3">夜·弐 (消炭 · 琥珀宵)</string>
+    <string id="FontSelectLabel">主时间字体</string>
+    <string id="BgModeLabel">日系简笔背景模式</string>
+    <string id="ArcModeLabel">边缘弧线进度条</string>
+</resources>

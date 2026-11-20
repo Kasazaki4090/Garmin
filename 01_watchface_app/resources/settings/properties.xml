@@ -1,0 +1,8 @@
+<properties>
+    <!-- 主题配置短码，默认为空，当为空时使用 PresetTheme 预设 -->
+    <property id="ThemeCode" type="string"></property>
+    <!-- 预设主题索引 0~3 -->
+    <property id="PresetTheme" type="number">0</property>
+    <!-- 是否开启 MIP 64色保护 -->
+    <property id="ForceMIPQuantize" type="boolean">true</property>
+</properties>
