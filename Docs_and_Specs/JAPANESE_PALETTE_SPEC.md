@@ -1,7 +1,7 @@
 # 日本传统色系 (日本の伝統色) 表盘色卡与 6 套日系简笔画规范
 
 > 参考色库：[Japanese Traditional Colors (日本の伝統色)](https://www.color5.com/color-system/japanese-traditional-colors/)
-> 本规范直接供 `03_cloudflare_palette_web`（网页调色器）与 `01_watchface_app/source/ThemeManager.mc` 调用。
+> 本规范直接供 `Cloudflare_page`（网页调色器）与 `Komorebi\01_watchface_app\source\ThemeManager.mc` 调用。
 
 ---
 

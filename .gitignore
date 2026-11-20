@@ -14,7 +14,6 @@ tools/
 
 # VS Code & IDE files
 .vscode/*
-!.vscode/settings.json
 
 # OS Generated
 Thumbs.db

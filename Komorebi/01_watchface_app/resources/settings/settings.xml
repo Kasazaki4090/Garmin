@@ -1,13 +1,14 @@
 <settings>
-    <setting propertyKey="@Properties.ThemeCode" title="@Strings.ThemeCodeLabel" prompt="@Strings.ThemeCodePrompt" type="string">
+    <setting propertyKey="@Properties.ThemeCode" title="@Strings.ThemeCodeLabel" prompt="@Strings.ThemeCodePrompt">
+        <settingConfig type="alphaNumeric" />
     </setting>
 
-    <setting propertyKey="@Properties.PresetTheme" title="@Strings.PresetThemeLabel" type="list">
-        <listConfig type="number">
+    <setting propertyKey="@Properties.PresetTheme" title="@Strings.PresetThemeLabel">
+        <settingConfig type="list">
             <listEntry value="0">@Strings.PresetTheme0</listEntry>
             <listEntry value="1">@Strings.PresetTheme1</listEntry>
             <listEntry value="2">@Strings.PresetTheme2</listEntry>
             <listEntry value="3">@Strings.PresetTheme3</listEntry>
-        </listConfig>
+        </settingConfig>
     </setting>
 </settings>

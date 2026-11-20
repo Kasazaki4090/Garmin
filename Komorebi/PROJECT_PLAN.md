@@ -34,38 +34,44 @@
 
 ## 二、 工作分区（Workspace 目录架构）
 
-当前工作区 `d:\Garmin` 已按功能模块划分为 4 个独立工作分区，后续让普通模型（如 Flash / Sonnet / 低配模型）写代码时，只需让它一次专注一个目录即可，极大节省 Token：
+仓库 `d:\Garmin` 按“**每个表盘一个顶级目录 + 共享分区**”划分。Komorebi 表盘目录内部再按功能分子分区，后续让普通模型（如 Flash / Sonnet / 低配模型）写代码时，只需让它一次专注一个目录即可，极大节省 Token：
 
 ```text
-d:\Garmin\
-├── PROJECT_PLAN.md                 # 【总纲】本规划文档
-├── 01_watchface_app\               # 【核心分区1】Garmin Monkey C 表盘工程源码
-│   ├── manifest.xml                # 设备兼容性、权限声明（天气、心率、身体电量等）
-│   ├── monkey.jungle               # 多分辨率/屏幕材质（MIP 反射屏 vs AMOLED）构建配置
-│   ├── resources\
-│   │   ├── fonts\                  # 5套打包好的自定义点阵字库 (.fnt + .png)
-│   │   ├── drawables\              # 简笔矢量/图标资源配置
-│   │   └── settings\               # Garmin Connect App 手机端设置项 (properties.xml / settings.xml)
-│   └── source\
-│       ├── WatchFaceApp.mc         # 应用入口与配置监听
-│       ├── WatchFaceView.mc        # 主渲染管线（生命周期、息屏 AOD 保护）
-│       ├── ThemeManager.mc         # 4套默认日夜配色 + 16进制调色码解析器
-│       ├── TimeRenderer.mc         # 核心大时间渲染（大小时、贴边缩进分钟、小秒钟、多字体切换）
-│       ├── MinimalBgDrawer.mc      # 简笔几何背景绘制器（晴/云/雨/雪/夜月纯代码矢量绘制）
-│       ├── DataFieldsDrawer.mc     # 顶部（电池/天气）+ 底部（身体数据矩阵）+ 左右可选弧形条
-│       └── DataProvider.mc         # 系统传感器与 Weather API 数据聚合缓存
+d:\Garmin\                          # 仓库根（含 README.md 总览与工作流）
+├── Komorebi\                       # 【表盘 1】Komorebi 木漏日
+│   ├── PROJECT_PLAN.md             # 【总纲】本规划文档
+│   ├── README.md                   # 表盘说明书
+│   ├── 01_watchface_app\           # 【核心分区1】Garmin Monkey C 表盘工程源码
+│   │   ├── manifest.xml            # 设备兼容性、权限声明（天气、心率、身体电量等）
+│   │   ├── monkey.jungle           # 多分辨率/屏幕材质（MIP 反射屏 vs AMOLED）构建配置
+│   │   ├── resources\
+│   │   │   ├── fonts\              # 5套打包好的自定义点阵字库 (.fnt + .png)
+│   │   │   ├── drawables\          # 简笔矢量/图标资源配置
+│   │   │   └── settings\           # Garmin Connect App 手机端设置项 (properties.xml / settings.xml)
+│   │   └── source\
+│   │       ├── WatchFaceApp.mc     # 应用入口与配置监听
+│   │       ├── WatchFaceView.mc    # 主渲染管线（生命周期、息屏 AOD 保护）
+│   │       ├── ThemeManager.mc     # 4套默认日夜配色 + 16进制调色码解析器
+│   │       ├── TimeRenderer.mc     # 核心大时间渲染（大小时、贴边缩进分钟、小秒钟、多字体切换）
+│   │       ├── MinimalBgDrawer.mc  # 简笔几何背景绘制器（晴/云/雨/雪/夜月纯代码矢量绘制）
+│   │       ├── DataFieldsDrawer.mc # 顶部（电池/天气）+ 底部（身体数据矩阵）+ 左右可选弧形条
+│   │       └── DataProvider.mc     # 系统传感器与 Weather API 数据聚合缓存
+│   │
+│   └── 02_font_and_vector_assets\  # 【资源分区2】字体制作与简笔图工具脚本
+│       ├── ttf_sources\            # 存放 5 种风格的原始 .ttf/.otf 字体文件
+│       ├── bmfont_configs\         # BMFont 导出配置（仅导出 0-9 和 : 节省 90% 内存）
+│       └── build_fonts.py          # 自动将 TTF 转为 Garmin .fnt + .png 的 Python 辅助脚本
 │
-├── 02_font_and_vector_assets\      # 【资源分区2】字体制作与简笔图工具脚本
-│   ├── ttf_sources\                # 存放 5 种风格的原始 .ttf/.otf 字体文件
-│   ├── bmfont_configs\             # BMFont 导出配置（仅导出 0-9 和 : 节省 90% 内存）
-│   └── build_fonts.py              # 自动将 TTF 转为 Garmin .fnt + .png 的 Python 辅助脚本
-│
-├── 03_cloudflare_palette_web\      # 【网页分区3】Cloudflare Pages 零后端 HTML5 调色盘
+├── Cloudflare_page\                # 【共享网页分区】Cloudflare Pages 零后端 HTML5 调色盘
 │   ├── index.html                  # 单页式表盘实时 Canvas/SVG 预览 + 调色器
 │   ├── style.css                   # 响应式暗黑/明亮 UI
-│   └── app.js                      # 实时仿真渲染 + 一键生成“6位主题短码”复制到 Garmin Connect
+│   └── app.js                      # 实时仿真渲染 + 一键生成“主题短码”复制到 Garmin Connect
 │
-└── 04_docs_and_specs\              # 【文档分区4】数据字典、配色色值表与屏幕坐标规范
+├── Docs_and_Specs\                 # 【共享文档分区】数据字典、配色色值表与屏幕坐标规范
+│   ├── JAPANESE_PALETTE_SPEC.md    # 48 种日本传统和色色卡与 6 套简笔画规范
+│   └── THEME_PROTOCOL.md           # 网页调色盘 <-> 表盘 主题短码通信协议
+│
+└── tools\                          # 【工具分区】SDK Manager 等本地开发工具（已 gitignore）
 ```
 
 ---
@@ -109,7 +115,7 @@ Garmin 手表内存极为有限（老机型几十 KB，新机型几百 KB），�
 | **Font 4** | **复古电子表数码管** (7-Segment LCD) | 经典卡西欧方块八段数码管，可选绘制一层极淡的“88:88”未点亮底影（如 *DSEG7 Classic*） | 复古极客、高辨识度 |
 | **Font 5** | **赛博辉光管** (Nixie Tube) | 模仿苏联 IN-14 辉光管内部金属丝层叠骨架，配合暖橙色配色绝佳（如 *Nixie One* 加粗修饰或定制辉光网格） | 夜间模式、蒸汽朋克风 |
 
-> **工程技巧**：在 `02_font_and_vector_assets` 中写一个 Python (`Pillow`) 脚本，不仅能一键把任何 `.ttf` 切成 Garmin 用的 `.fnt`，还能**自动给任何字体加上“iPhone 中间裂开”的镂空特效**或**数码管网格镂空特效**！
+> **工程技巧**：在 `Komorebi\02_font_and_vector_assets` 中写一个 Python (`Pillow`) 脚本，不仅能一键把任何 `.ttf` 切成 Garmin 用的 `.fnt`，还能**自动给任何字体加上“iPhone 中间裂开”的镂空特效**或**数码管网格镂空特效**！
 
 ---
 
@@ -220,14 +226,14 @@ sequenceDiagram
 
 为了最大限度节省你的高级模型（Argon）用量，后续执行我们可以拆成 **3 个独立小步骤**，你甚至可以切换到轻量模型（Flash 等）按本规划书逐个目录生成代码：
 
-### 阶段 1：先做 Cloudflare HTML5 网页调色盘与原型预览 (`03_cloudflare_palette_web`)
+### 阶段 1：先做 Cloudflare HTML5 网页调色盘与原型预览 (`Cloudflare_page`)
 - **为什么先做它？** 因为网页写起来最快，无需装 SDK 就能在浏览器里直接看到**大时间+贴边小分钟+5种字体+简笔背景+4套默认配色**的真实视觉效果！
 - 你在网页上把字号比例、简笔画线条位置、4套默认配色看着调到 100% 满意后，我们直接把网页里的坐标参数 1:1 翻译成 Garmin 代码，避免在模拟器里反复改坐标浪费额度。
 
-### 阶段 2：构建 5 套轻量数字字体工具 (`02_font_and_vector_assets`)
+### 阶段 2：构建 5 套轻量数字字体工具 (`Komorebi\02_font_and_vector_assets`)
 - 编写 Python 自动化脚本，提取 5 种字体（含自动生成 iPhone 中间裂开效果、数码管、辉光管、宋体、黑体）的 `0-9` 数字，直接输出 Garmin `.fnt` + `.png` 资源包。
 
-### 阶段 3：生成 Garmin Monkey C 完整表盘工程 (`01_watchface_app`)
+### 阶段 3：生成 Garmin Monkey C 完整表盘工程 (`Komorebi\01_watchface_app`)
 - 编写 `manifest.xml` 及 `source/*.mc` 核心代码。
 - 接入 `ThemeManager`（内置 4 套日夜主题 + 解析 HTML5 网页生成的调色码）。
 - 接入 `MinimalBgDrawer` 矢量简笔天气/夜景绘制与 `DataFieldsDrawer` 全套身体数据。

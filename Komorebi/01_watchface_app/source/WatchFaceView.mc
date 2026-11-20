@@ -33,9 +33,9 @@ class WatchFaceView extends WatchUi.WatchFace {
             MinimalBgDrawer.draw(dc, w, h, mTheme.bgMode, mTheme.colorBgLines);
         }
 
-        // 3. 绘制核心错落大时间
+        // 3. 绘制核心矢量段码大时间（居中，占据屏幕主体）
         var is24Hour = System.getDeviceSettings().is24Hour;
-        TimeRenderer.drawTime(dc, w, h, mTheme, is24Hour, !mIsSleeping);
+        SegmentClock.draw(dc, w, h, mTheme, is24Hour, !mIsSleeping);
 
         // 4. 绘制顶部状态 (电量/天气/日期)
         DataFieldsDrawer.drawTopZone(dc, w, h, mTheme);
