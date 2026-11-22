@@ -1,0 +1,26 @@
+<fonts>
+    <font id="f1_split_big" filename="f1_split_big.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f1_split_mid" filename="f1_split_mid.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f1_split_mini" filename="f1_split_mini.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f1_split_mip_big" filename="f1_split_mip_big.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f1_split_mip_mid" filename="f1_split_mip_mid.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f1_split_mip_mini" filename="f1_split_mip_mini.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f4_lcd_big" filename="f4_lcd_big.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f4_lcd_mid" filename="f4_lcd_mid.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f4_lcd_mini" filename="f4_lcd_mini.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f4_lcd_mip_big" filename="f4_lcd_mip_big.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f4_lcd_mip_mid" filename="f4_lcd_mip_mid.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f4_lcd_mip_mini" filename="f4_lcd_mip_mini.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f5_nixie_big" filename="f5_nixie_big.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f5_nixie_mid" filename="f5_nixie_mid.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f5_nixie_mini" filename="f5_nixie_mini.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f5_nixie_mip_big" filename="f5_nixie_mip_big.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f5_nixie_mip_mid" filename="f5_nixie_mip_mid.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f5_nixie_mip_mini" filename="f5_nixie_mip_mini.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f2_mincho_biz_big" filename="f2_mincho_biz_big.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f2_mincho_biz_mid" filename="f2_mincho_biz_mid.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f2_mincho_biz_mini" filename="f2_mincho_biz_mini.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f2_mincho_biz_mip_big" filename="f2_mincho_biz_mip_big.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f2_mincho_biz_mip_mid" filename="f2_mincho_biz_mip_mid.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f2_mincho_biz_mip_mini" filename="f2_mincho_biz_mip_mini.fnt" antialias="true" filter=" 0123456789:" />
+</fonts>

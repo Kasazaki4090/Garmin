@@ -13,20 +13,20 @@ class ThemeManager {
     public var colorData as Number = 0x524E4D;       // 数据指标文字色 (消炭)
     public var colorAccent as Number = 0xB7282E;     // 高亮色/朱印 (茜素红)
 
-    public var fontId as Number = 2;                 // 字体选择 F1~F5
+    public var fontId as Number = 1;                 // 字体选择 F1~F5 (默认 F1 iPhone裂开Mono)
     public var bgMode as Number = 0;                 // 简笔画模式 B0~B6 (0为自动根据天气/日出日落)
-    public var arcMode as Number = 0;                // 边缘进度弧模式 A0~A2 (0关闭, 1细线, 2分段)
+    public var arcMode as Number = 1;                // 边缘进度弧模式 A0~A2 (默认 A1 保留左右双弧)
 
     // 4 套预设主题 (AMOLED 色值)
     private static const PRESET_THEMES = [
-        // 0: 昼·壱 (白练 · 茜素)
-        "F2-B0-A0-F3F3F2-1C1C1C-B7282E-787878-9EA1A3-524E4D-B7282E",
+        // 0: 昼·壱 (白练 · 茜素) - F1 iPhone裂开Mono + A1 左右细弧
+        "F1-B0-A1-F3F3F2-1C1C1C-B7282E-787878-9EA1A3-524E4D-B7282E",
         // 1: 昼·弐 (鸟之子 · 青磁)
-        "F1-B0-A0-EFEACC-2B373B-69B0AC-828282-BC9F77-494A41-69B0AC",
+        "F1-B0-A1-EFEACC-2B373B-69B0AC-828282-BC9F77-494A41-69B0AC",
         // 2: 夜·壱 (胜色 · 樱月)
-        "F3-B0-A0-0B1013-F7FCFE-FEDFE1-8899A0-566C73-ADADAD-F596AA",
+        "F4-B0-A1-0B1013-F7FCFE-FEDFE1-8899A0-566C73-ADADAD-F596AA",
         // 3: 夜·弐 (消炭 · 琥珀宵)
-        "F5-B6-A0-0C0C0C-F4DDA5-CA7A2C-9E9478-5A5359-9E9478-E2943B"
+        "F5-B6-A1-0C0C0C-F4DDA5-CA7A2C-9E9478-5A5359-9E9478-E2943B"
     ];
 
     function initialize() {

@@ -1,95 +1,94 @@
+import Toybox.Application;
 import Toybox.Graphics;
 import Toybox.Lang;
-import Toybox.Math;
+import Toybox.System;
+import Toybox.Weather;
+import Toybox.WatchUi;
 
-// 极简日系背景：圆相（禅圈）框住时间 + 地平线 + 右上角按模式点缀符号
+// 全屏圆表盘水彩背景绘制器 (454x454 满屏绘制，带自动白天/夜间/天气切换)
 class MinimalBgDrawer {
-    public static function draw(dc as Graphics.Dc, width as Number, height as Number, mode as Number, color as Number) as Void {
-        var w = width;
-        var h = height;
-        dc.setColor(color, Graphics.COLOR_TRANSPARENT);
-        dc.setPenWidth(2);
+    private static var mCachedMode as Number = -1;
+    private static var mCachedBitmap as WatchUi.BitmapResource? = null;
 
-        // 1. 圆相（Ensō）：一个大圆环，左下留缺口，框住中央时间
-        drawEnso(dc, w, h);
+    public static function draw(dc as Graphics.Dc, width as Number, height as Number, mode as Number, lineColor as Number) as Void {
+        var activeMode = resolveMode(mode);
 
-        // 2. 地平线：底部一条淡墨横线
-        var hy = (h * 0.80).toNumber();
-        dc.drawLine((w * 0.16).toNumber(), hy, (w * 0.84).toNumber(), hy);
+        if (activeMode != mCachedMode || mCachedBitmap == null) {
+            mCachedMode = activeMode;
+            mCachedBitmap = loadSceneBitmap(activeMode);
+        }
 
-        // 3. 右上角模式符号（克制，单一元素）
-        switch (mode) {
-            case 1: drawSun(dc, w, h); break;       // 晴 · 日轮
-            case 2: drawClouds(dc, w, h); break;    // 云 · 流云
-            case 3: drawMist(dc, w, h); break;      // 雾 · 远山
-            case 4: drawRain(dc, w, h); break;      // 雨 · 雨丝
-            case 5: drawSnow(dc, w, h); break;      // 雪 · 雪花
-            case 6: drawMoon(dc, w, h); break;      // 夜 · 弦月
-            default: drawSun(dc, w, h); break;
+        if (mCachedBitmap != null) {
+            var bmp = mCachedBitmap as WatchUi.BitmapResource;
+            var bw = bmp.getWidth();
+            var bh = bmp.getHeight();
+            var bx = ((width - bw) / 2).toNumber();
+            var by = ((height - bh) / 2).toNumber();
+            dc.drawBitmap(bx, by, bmp);
         }
     }
 
-    // 圆相：约 86% 直径的圆环，左下留一段缺口（手绘禅意）
-    private static function drawEnso(dc as Graphics.Dc, w as Number, h as Number) as Void {
-        var cx = (w / 2).toNumber();
-        var cy = (h / 2).toNumber();
-        var side = w < h ? w : h;
-        var r = ((side / 2) * 0.86).toNumber();
-        dc.setPenWidth(3);
-        // 从 130° 顺时针画到 95°（即左下留约 35° 缺口）
-        dc.drawArc(cx, cy, r, Graphics.ARC_CLOCKWISE, 130, 95);
-        dc.setPenWidth(2);
-    }
-
-    // 日轮：实心小圆点（朱印感）
-    private static function drawSun(dc as Graphics.Dc, w as Number, h as Number) as Void {
-        var sx = (w * 0.74).toNumber();
-        var sy = (h * 0.20).toNumber();
-        var r = (w * 0.035).toNumber();
-        dc.drawCircle(sx, sy, r);
-    }
-
-    // 流云：两条长短错落的水平线
-    private static function drawClouds(dc as Graphics.Dc, w as Number, h as Number) as Void {
-        var y = (h * 0.20).toNumber();
-        dc.drawLine((w * 0.66).toNumber(), y, (w * 0.84).toNumber(), y);
-        dc.drawLine((w * 0.72).toNumber(), (y + 7).toNumber(), (w * 0.82).toNumber(), (y + 7).toNumber());
-    }
-
-    // 远山：一个简洁折线山脊
-    private static function drawMist(dc as Graphics.Dc, w as Number, h as Number) as Void {
-        var y = (h * 0.22).toNumber();
-        dc.drawLine((w * 0.66).toNumber(), y, (w * 0.74).toNumber(), (y - 12).toNumber());
-        dc.drawLine((w * 0.74).toNumber(), (y - 12).toNumber(), (w * 0.84).toNumber(), y);
-    }
-
-    // 雨丝：三条短斜线
-    private static function drawRain(dc as Graphics.Dc, w as Number, h as Number) as Void {
-        var x = (w * 0.72).toNumber();
-        var y = (h * 0.18).toNumber();
-        for (var i = 0; i < 3; i++) {
-            var px = (x + i * 8).toNumber();
-            dc.drawLine(px, y, (px - 4).toNumber(), (y + 12).toNumber());
+    private static function resolveMode(mode as Number) as Number {
+        if (mode >= 1 && mode <= 6) {
+            return mode;
         }
+        var clock = System.getClockTime();
+        if (clock.hour >= 19 || clock.hour < 6) {
+            return 6;
+        }
+        if (Toybox has :Weather) {
+            var cond = Weather.getCurrentConditions();
+            if (cond != null && cond.condition != null) {
+                var c = cond.condition;
+                // 4. 雨 / 雷暴 / 台风 / 热带风暴
+                if (c == Weather.CONDITION_RAIN || c == Weather.CONDITION_LIGHT_RAIN ||
+                    c == Weather.CONDITION_HEAVY_RAIN || c == Weather.CONDITION_SHOWERS ||
+                    c == Weather.CONDITION_THUNDERSTORMS || c == Weather.CONDITION_CHANCE_OF_SHOWERS ||
+                    c == Weather.CONDITION_SCATTERED_SHOWERS || c == Weather.CONDITION_DRIZZLE ||
+                    c == Weather.CONDITION_CHANCE_OF_THUNDERSTORMS || c == Weather.CONDITION_HURRICANE ||
+                    c == Weather.CONDITION_TROPICAL_STORM || c == Weather.CONDITION_SQUALL) {
+                    return 4;
+                }
+                // 5. 雪 / 雨夹雪 / 冻雨 / 冰雹
+                if (c == Weather.CONDITION_SNOW || c == Weather.CONDITION_LIGHT_SNOW ||
+                    c == Weather.CONDITION_HEAVY_SNOW || c == Weather.CONDITION_WINTRY_MIX ||
+                    c == Weather.CONDITION_RAIN_SNOW || c == Weather.CONDITION_SLEET ||
+                    c == Weather.CONDITION_HAIL || c == Weather.CONDITION_CHANCE_OF_SNOW ||
+                    c == Weather.CONDITION_FREEZING_RAIN || c == Weather.CONDITION_ICE) {
+                    return 5;
+                }
+                // 3. 雾 / 阴天 / 霾 / 沙尘
+                if (c == Weather.CONDITION_FOG || c == Weather.CONDITION_HAZY ||
+                    c == Weather.CONDITION_MIST || c == Weather.CONDITION_SMOKE ||
+                    c == Weather.CONDITION_CLOUDY || c == Weather.CONDITION_MOSTLY_CLOUDY ||
+                    c == Weather.CONDITION_DUST || c == Weather.CONDITION_SAND ||
+                    c == Weather.CONDITION_SANDSTORM) {
+                    return 3;
+                }
+                // 2. 多云 / 少云 / 微风
+                if (c == Weather.CONDITION_PARTLY_CLOUDY || c == Weather.CONDITION_MOSTLY_CLEAR ||
+                    c == Weather.CONDITION_PARTLY_CLEAR || c == Weather.CONDITION_THIN_CLOUDS ||
+                    c == Weather.CONDITION_WINDY) {
+                    return 2;
+                }
+            }
+        }
+        return 1;
     }
 
-    // 雪花：单枚米字星
-    private static function drawSnow(dc as Graphics.Dc, w as Number, h as Number) as Void {
-        var x = (w * 0.74).toNumber();
-        var y = (h * 0.20).toNumber();
-        var r = (w * 0.03).toNumber();
-        dc.drawLine(x, (y - r).toNumber(), x, (y + r).toNumber());
-        dc.drawLine((x - r).toNumber(), y, (x + r).toNumber(), y);
-        var d = (r * 0.7).toNumber();
-        dc.drawLine((x - d).toNumber(), (y - d).toNumber(), (x + d).toNumber(), (y + d).toNumber());
-        dc.drawLine((x - d).toNumber(), (y + d).toNumber(), (x + d).toNumber(), (y - d).toNumber());
-    }
-
-    // 弦月：两圆相切形成的弯月
-    private static function drawMoon(dc as Graphics.Dc, w as Number, h as Number) as Void {
-        var mx = (w * 0.74).toNumber();
-        var my = (h * 0.20).toNumber();
-        var r = (w * 0.04).toNumber();
-        dc.drawCircle(mx, my, r);
+    private static function loadSceneBitmap(mode as Number) as WatchUi.BitmapResource? {
+        try {
+            switch (mode) {
+                case 1: return Application.loadResource(Rez.Drawables.BgScene1) as WatchUi.BitmapResource;
+                case 2: return Application.loadResource(Rez.Drawables.BgScene2) as WatchUi.BitmapResource;
+                case 3: return Application.loadResource(Rez.Drawables.BgScene3) as WatchUi.BitmapResource;
+                case 4: return Application.loadResource(Rez.Drawables.BgScene4) as WatchUi.BitmapResource;
+                case 5: return Application.loadResource(Rez.Drawables.BgScene5) as WatchUi.BitmapResource;
+                case 6: return Application.loadResource(Rez.Drawables.BgScene6) as WatchUi.BitmapResource;
+                default: return Application.loadResource(Rez.Drawables.BgScene1) as WatchUi.BitmapResource;
+            }
+        } catch (ex) {
+            return null;
+        }
     }
 }

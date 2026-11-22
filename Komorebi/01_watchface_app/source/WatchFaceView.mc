@@ -28,14 +28,14 @@ class WatchFaceView extends WatchUi.WatchFace {
         dc.setColor(mTheme.colorBg, mTheme.colorBg);
         dc.clear();
 
-        // 2. 绘制极简几何日系简笔画背景 (息屏时不绘制简笔背景，节省 AMOLED 烧屏风险和 MIP 功耗)
+        // 2. 绘制极简圆相禅圈与水彩日系景物 (息屏时不绘制重度背景，节省 AMOLED 烧屏风险和 MIP 功耗)
         if (!mIsSleeping) {
             MinimalBgDrawer.draw(dc, w, h, mTheme.bgMode, mTheme.colorBgLines);
         }
 
-        // 3. 绘制核心矢量段码大时间（居中，占据屏幕主体）
+        // 3. 绘制核心大时间（F2 衬线字库 / 矢量段码兜底，居中占据屏幕主体）
         var is24Hour = System.getDeviceSettings().is24Hour;
-        SegmentClock.draw(dc, w, h, mTheme, is24Hour, !mIsSleeping);
+        TimeRenderer.draw(dc, w, h, mTheme, is24Hour, !mIsSleeping);
 
         // 4. 绘制顶部状态 (电量/天气/日期)
         DataFieldsDrawer.drawTopZone(dc, w, h, mTheme);

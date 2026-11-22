@@ -1,3 +1,11 @@
 <drawables>
     <bitmap id="LauncherIcon" filename="launcher_icon.png" />
+
+    <!-- 6 套透明水彩日系景物贴片 (360x135) -->
+    <bitmap id="BgScene1" filename="bg_1.png" dithering="none" />
+    <bitmap id="BgScene2" filename="bg_2.png" dithering="none" />
+    <bitmap id="BgScene3" filename="bg_3.png" dithering="none" />
+    <bitmap id="BgScene4" filename="bg_4.png" dithering="none" />
+    <bitmap id="BgScene5" filename="bg_5.png" dithering="none" />
+    <bitmap id="BgScene6" filename="bg_6.png" dithering="none" />
 </drawables>
