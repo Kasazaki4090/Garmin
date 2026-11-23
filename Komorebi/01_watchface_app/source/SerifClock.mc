@@ -51,9 +51,9 @@ class SerifClock {
             return false;
         }
 
-        // 布局居中偏上 (0.19 * h)，整体上提给下方大肥猫与景物留足空间
+        // 布局居中偏上，留足顶部 2~3 行信息与下半屏数据空间
         var startX = ((w - totalW) / 2).toNumber();
-        var topY = (h * 0.19).toNumber();
+        var topY = (h * (theme.showWeatherCond ? 0.245 : 0.215)).toNumber();
         var bigCenterY = (topY + digitH / 2).toNumber();
 
         var colonX = startX + hourW + gap;

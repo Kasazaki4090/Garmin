@@ -17,6 +17,19 @@ class ThemeManager {
     public var bgMode as Number = 0;                 // 简笔画模式 B0~B6 (0为自动根据天气/日出日落)
     public var arcMode as Number = 1;                // 边缘进度弧模式 A0~A2 (默认 A1 保留左右双弧)
 
+    // 布局与可自定义数据槽位设置
+    public var showWeekday as Boolean = true;
+    public var showWeatherCond as Boolean = false;
+    public var leftArcMetric as Number = 3;          // 默认身体电量
+    public var rightArcMetric as Number = 2;         // 默认步数目标进度
+    public var slotWingL as Number = 3;              // 左翼: 身体电量
+    public var slotWingR as Number = 2;              // 右翼: 步数
+    public var slotBot1 as Number = 1;               // 底部第1行: 心率
+    public var slotBot2 as Number = 6;               // 底部第2行左: 距离
+    public var slotBot3 as Number = 7;               // 底部第2行右: 海拔
+    public var slotBot4 as Number = 5;               // 底部第3行左: 卡路里
+    public var slotBot5 as Number = 10;              // 底部第3行右: VO2 Max
+
     // 4 套预设主题 (AMOLED 色值)
     private static const PRESET_THEMES = [
         // 0: 昼·壱 (白练 · 茜素) - F1 iPhone裂开Mono + A1 左右细弧
@@ -46,6 +59,34 @@ class ThemeManager {
         }
 
         parseThemeCode(code);
+
+        showWeekday = readBoolProp(app, "ShowWeekday", true);
+        showWeatherCond = readBoolProp(app, "ShowWeatherCond", false);
+        leftArcMetric = readNumProp(app, "LeftArcMetric", 3);
+        rightArcMetric = readNumProp(app, "RightArcMetric", 2);
+        slotWingL = readNumProp(app, "SlotWingL", 3);
+        slotWingR = readNumProp(app, "SlotWingR", 2);
+        slotBot1 = readNumProp(app, "SlotBot1", 1);
+        slotBot2 = readNumProp(app, "SlotBot2", 6);
+        slotBot3 = readNumProp(app, "SlotBot3", 7);
+        slotBot4 = readNumProp(app, "SlotBot4", 5);
+        slotBot5 = readNumProp(app, "SlotBot5", 10);
+    }
+
+    private function readNumProp(app as Application.AppBase, key as String, fallback as Number) as Number {
+        var val = app.getProperty(key);
+        if (val instanceof Number) {
+            return val;
+        }
+        return fallback;
+    }
+
+    private function readBoolProp(app as Application.AppBase, key as String, fallback as Boolean) as Boolean {
+        var val = app.getProperty(key);
+        if (val instanceof Boolean) {
+            return val;
+        }
+        return fallback;
     }
 
     // 解析形如: F2-B0-A0-F3F3F2-1C1C1C-B7282E-787878-9EA1A3-524E4D-B7282E

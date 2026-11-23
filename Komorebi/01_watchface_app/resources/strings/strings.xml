@@ -10,4 +10,38 @@
     <string id="FontSelectLabel">主时间字体</string>
     <string id="BgModeLabel">日系简笔背景模式</string>
     <string id="ArcModeLabel">边缘弧线进度条</string>
+
+    <string id="ShowWeekdayLabel">顶部显示星期</string>
+    <string id="ShowWeatherCondLabel">顶部显示天气状态行</string>
+
+    <string id="LeftArcMetricLabel">左下弧线进度条</string>
+    <string id="RightArcMetricLabel">右下弧线进度条</string>
+    <string id="ArcOpt0">关闭</string>
+    <string id="ArcOpt1">手表电量</string>
+    <string id="ArcOpt2">步数目标进度</string>
+    <string id="ArcOpt3">身体电量</string>
+    <string id="ArcOpt4">高强度活动进度</string>
+
+    <string id="SlotWingLLabel">左翼数据 (弧内)</string>
+    <string id="SlotWingRLabel">右翼数据 (弧内)</string>
+    <string id="SlotBot1Label">底部第1行 (居中)</string>
+    <string id="SlotBot2Label">底部第2行-左</string>
+    <string id="SlotBot3Label">底部第2行-右</string>
+    <string id="SlotBot4Label">底部第3行-左</string>
+    <string id="SlotBot5Label">底部第3行-右</string>
+
+    <string id="Metric0">隐藏 (不显示)</string>
+    <string id="Metric1">心率 (HR)</string>
+    <string id="Metric2">步数 (Steps)</string>
+    <string id="Metric3">身体电量 (Body Battery)</string>
+    <string id="Metric4">压力 (Stress)</string>
+    <string id="Metric5">卡路里 (kcal)</string>
+    <string id="Metric6">今日距离 (km/mi)</string>
+    <string id="Metric7">海拔 (ALT)</string>
+    <string id="Metric8">爬楼层数 (Floors)</string>
+    <string id="Metric9">手表电量 (%)</string>
+    <string id="Metric10">最大摄氧量 (VO2 Max)</string>
+    <string id="Metric11">活动分钟 (Active Min)</string>
+    <string id="Metric12">步数目标百分比 (%)</string>
+    <string id="Metric13">消息通知数</string>
 </resources>

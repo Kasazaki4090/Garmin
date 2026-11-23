@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WaTime 和色时光 · 佳明表盘调色器</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-seal">和</span>
+      <div>
+        <h1 data-i18n="appTitle">WaTime 和色时光</h1>
+        <p class="subtitle" data-i18n="appSubtitle">Garmin 表盘在线调色与短码生成器</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <div class="lang-switch" id="langSwitch" role="group" aria-label="Language">
+        <button type="button" class="lang-btn active" data-lang="zh">中</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="ja">日</button>
+      </div>
+      <label class="mip-toggle" title="MIP 64-color nearest-neighbor preview">
+        <input type="checkbox" id="mipToggle" />
+        <span data-i18n="mipToggle">MIP 64色预览</span>
+      </label>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- 左侧：表盘 1:1 实时预览 + 短码输出 -->
+    <section class="preview-panel">
+      <div class="watch-bezel">
+        <canvas id="watchCanvas" width="454" height="454"></canvas>
+      </div>
+
+      <div class="preview-toggles">
+        <label><input type="checkbox" id="showWeekday" checked /> <span data-i18n="toggleWeekday">顶部星期</span></label>
+        <label><input type="checkbox" id="showWeatherCond" /> <span data-i18n="toggleWeather">天气状态行</span></label>
+      </div>
+
+      <div class="shortcode-card">
+        <div class="shortcode-header">
+          <span data-i18n="shortcodeLabel">主题短码（复制后粘贴到 Garmin Connect 表盘设置）</span>
+          <button id="copyBtn" class="btn-primary" data-i18n="copyBtn">一键复制</button>
+        </div>
+        <div class="shortcode-row">
+          <input type="text" id="themeCodeInput" spellcheck="false" />
+        </div>
+        <p id="copyToast" class="toast" aria-live="polite"></p>
+      </div>
+
+      <div class="presets-bar">
+        <span class="section-label" data-i18n="presetsLabel">预设和色主题：</span>
+        <div class="preset-buttons" id="presetButtons"></div>
+      </div>
+    </section>
+
+    <!-- 右侧：字体/背景/弧线 + 7部位赋色 + 48和色色卡 -->
+    <section class="controls-panel">
+      <div class="control-group">
+        <h2 data-i18n="sec1Title">1. 版式与水彩背景</h2>
+        <div class="select-grid">
+          <label>
+            <span data-i18n="fontLabel">主时间字体 (F)</span>
+            <select id="fontSelect">
+              <option value="1" data-i18n="f1">F1 · 裂开 Mono</option>
+              <option value="2" data-i18n="f2">F2 · 明朝衬线</option>
+              <option value="3" data-i18n="f3">F3 · 硬派黑体 (矢量)</option>
+              <option value="4" data-i18n="f4">F4 · 八段数码管</option>
+              <option value="5" data-i18n="f5">F5 · 复古辉光管</option>
+            </select>
+          </label>
+          <label>
+            <span data-i18n="bgLabel">水彩背景 (B)</span>
+            <select id="bgSelect">
+              <option value="0" data-i18n="b0">B0 · 自动 (天气/昼夜)</option>
+              <option value="1" data-i18n="b1">B1 · 晴 · 远山日轮</option>
+              <option value="2" data-i18n="b2">B2 · 云 · 浮世流云</option>
+              <option value="3" data-i18n="b3">B3 · 雾 · 水墨层峦</option>
+              <option value="4" data-i18n="b4">B4 · 雨 · 细雨涟漪</option>
+              <option value="5" data-i18n="b5">B5 · 雪 · 雪峰寒星</option>
+              <option value="6" data-i18n="b6">B6 · 夜 · 弦月眠猫</option>
+            </select>
+          </label>
+          <label>
+            <span data-i18n="arcLabel">下半屏弧线 (A)</span>
+            <select id="arcSelect">
+              <option value="1" data-i18n="a1">A1 · 下半屏细弧</option>
+              <option value="2" data-i18n="a2">A2 · 下半屏粗弧</option>
+              <option value="0" data-i18n="a0">A0 · 关闭弧线</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <h2 data-i18n="sec2Title">2. 部位调色（点选部位，可手动输入 HEX、取色或点选和色）</h2>
+        <div class="slots-grid" id="colorSlots"></div>
+      </div>
+
+      <div class="control-group">
+        <div class="palette-header">
+          <h2 data-i18n="sec3Title">3. 日本传统和色字典（48 色）</h2>
+          <div class="cat-tabs" id="catTabs"></div>
+        </div>
+        <div class="swatches-grid" id="swatchesGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

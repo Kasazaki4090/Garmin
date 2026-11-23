@@ -64,7 +64,7 @@ class SegmentClock {
 
         var totalW = advH1 + hGap + advH2 + hGap + colonW + hGap + rightColW;
         var startX = ((w - totalW) / 2).toNumber();
-        var topY = (h * 0.25).toNumber();
+        var topY = (h * (theme.showWeatherCond ? 0.255 : 0.23)).toNumber();
 
         var x = startX;
         drawDigit(dc, x, topY, digitW, digitH, thick, h1, theme.colorHour);

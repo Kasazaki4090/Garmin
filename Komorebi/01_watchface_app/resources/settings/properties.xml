@@ -5,4 +5,21 @@
     <property id="PresetTheme" type="number">0</property>
     <!-- 是否开启 MIP 64色保护 -->
     <property id="ForceMIPQuantize" type="boolean">true</property>
+
+    <!-- 顶部显示选项 -->
+    <property id="ShowWeekday" type="boolean">true</property>
+    <property id="ShowWeatherCond" type="boolean">false</property>
+
+    <!-- 下半屏左右弧线进度条数据源 (0=关闭, 1=电量, 2=步数目标, 3=身体电量, 4=高强度活动) -->
+    <property id="LeftArcMetric" type="number">3</property>
+    <property id="RightArcMetric" type="number">2</property>
+
+    <!-- 可自定义数据槽位 (参考 MetricId 枚举) -->
+    <property id="SlotWingL" type="number">3</property>
+    <property id="SlotWingR" type="number">2</property>
+    <property id="SlotBot1" type="number">1</property>
+    <property id="SlotBot2" type="number">6</property>
+    <property id="SlotBot3" type="number">7</property>
+    <property id="SlotBot4" type="number">5</property>
+    <property id="SlotBot5" type="number">10</property>
 </properties>
