@@ -11,8 +11,8 @@ class DataFieldsDrawer {
     //   第2行: 日期 - 星期(可选) - 气温 (居中)
     //   第3行 (可选): 天气状态 (居中)
     public static function drawTopZone(dc as Graphics.Dc, w as Number, h as Number, theme as ThemeManager) as Void {
-        // 1. 顶部居中：电池图标 + 百分比
-        var topY = (h * 0.085).toNumber();
+        // 1. 顶部居中：电池图标 + 百分比 (上提至 0.070h 留出呼吸空间)
+        var topY = (h * 0.070).toNumber();
         var batt = DataProvider.getBattery();
         var battColor = batt <= 20 ? theme.colorAccent : theme.colorData;
         var battStr = Lang.format("$1$%", [batt]);
@@ -47,7 +47,7 @@ class DataFieldsDrawer {
         );
 
         // 2. 第二行：日期 - 星期(可选) - 气温
-        var row2Y = (h * 0.152).toNumber();
+        var row2Y = (h * 0.132).toNumber();
         var now = Time.now();
         var info = Gregorian.info(now, Time.FORMAT_SHORT);
         var dateStr = Lang.format("$1$/$2$", [info.month.format("%02d"), info.day.format("%02d")]);
@@ -70,7 +70,7 @@ class DataFieldsDrawer {
 
         // 3. 第三行（可选）：天气状态
         if (theme.showWeatherCond) {
-            var row3Y = (h * 0.205).toNumber();
+            var row3Y = (h * 0.188).toNumber();
             dc.setColor(theme.colorBgLines, Graphics.COLOR_TRANSPARENT);
             dc.drawText(
                 (w * 0.50).toNumber(),
@@ -147,23 +147,30 @@ class DataFieldsDrawer {
         dc.setPenWidth(1);
     }
 
-    // 绘制左右两翼槽位：上方图标 + 中间大数值 + 下方小标签
+    // 绘制左右两翼槽位：小图标与数值同行居中 + 下方小标签，绝不与上方时钟和下方标签重叠
     private static function drawWingSlot(dc as Graphics.Dc, w as Number, h as Number, cx as Number, cy as Number, metricId as Number, iconColor as Number, theme as ThemeManager) as Void {
         if (metricId == 0) {
             return;
         }
-        var iconY = (cy - h * 0.052).toNumber();
-        var subY = (cy + h * 0.055).toNumber();
+        var valStr = DataProvider.getWingValue(metricId);
+        var valY = (cy - h * 0.015).toNumber();
+        var subY = (cy + h * 0.048).toNumber();
 
-        drawMetricIcon(dc, metricId, cx, iconY, iconColor);
+        var valW = dc.getTextWidthInPixels(valStr, Graphics.FONT_SMALL);
+        var iconSpace = (w * 0.032).toNumber();
+        if (iconSpace < 12) { iconSpace = 12; }
+        var totalW = iconSpace + valW;
+        var startX = (cx - totalW / 2).toNumber();
+
+        drawMetricIcon(dc, metricId, startX + 4, valY, iconColor);
 
         dc.setColor(theme.colorHour, Graphics.COLOR_TRANSPARENT);
         dc.drawText(
-            cx,
-            cy,
+            startX + iconSpace,
+            valY,
             Graphics.FONT_SMALL,
-            DataProvider.getWingValue(metricId),
-            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
+            valStr,
+            Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER
         );
 
         dc.setColor(theme.colorData, Graphics.COLOR_TRANSPARENT);

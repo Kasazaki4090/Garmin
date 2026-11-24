@@ -23,4 +23,10 @@
     <font id="f2_mincho_biz_mip_big" filename="f2_mincho_biz_mip_big.fnt" antialias="true" filter=" 0123456789:" />
     <font id="f2_mincho_biz_mip_mid" filename="f2_mincho_biz_mip_mid.fnt" antialias="true" filter=" 0123456789:" />
     <font id="f2_mincho_biz_mip_mini" filename="f2_mincho_biz_mip_mini.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f6_sirin_big" filename="f6_sirin_big.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f6_sirin_mid" filename="f6_sirin_mid.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f6_sirin_mini" filename="f6_sirin_mini.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f6_sirin_mip_big" filename="f6_sirin_mip_big.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f6_sirin_mip_mid" filename="f6_sirin_mip_mid.fnt" antialias="true" filter=" 0123456789:" />
+    <font id="f6_sirin_mip_mini" filename="f6_sirin_mip_mini.fnt" antialias="true" filter=" 0123456789:" />
 </fonts>

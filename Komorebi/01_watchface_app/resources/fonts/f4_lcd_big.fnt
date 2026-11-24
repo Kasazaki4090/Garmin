@@ -1,16 +1,16 @@
-info face="KomorebiLCDMono" size=124 bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=8,8
-common lineHeight=124 base=124 scaleW=961 scaleH=161 pages=1 packed=0
+info face="f4_lcd_big" size=116 bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=6,6
+common lineHeight=116 base=116 scaleW=788 scaleH=128 pages=1 packed=0
 page id=0 file="f4_lcd_big.png"
 chars count=12
-char id=32 x=0 y=0 width=0 height=0 xoffset=0 yoffset=0 xadvance=42 page=0 chnl=15
-char id=48 x=8 y=8 width=85 height=145 xoffset=0 yoffset=0 xadvance=85 page=0 chnl=15
-char id=49 x=101 y=8 width=83 height=143 xoffset=1 yoffset=0 xadvance=85 page=0 chnl=15
-char id=50 x=192 y=8 width=85 height=145 xoffset=0 yoffset=0 xadvance=85 page=0 chnl=15
-char id=51 x=285 y=8 width=83 height=145 xoffset=1 yoffset=0 xadvance=85 page=0 chnl=15
-char id=52 x=376 y=8 width=85 height=143 xoffset=0 yoffset=0 xadvance=85 page=0 chnl=15
-char id=53 x=469 y=8 width=85 height=145 xoffset=0 yoffset=0 xadvance=85 page=0 chnl=15
-char id=54 x=562 y=8 width=85 height=145 xoffset=0 yoffset=0 xadvance=85 page=0 chnl=15
-char id=55 x=655 y=8 width=83 height=145 xoffset=1 yoffset=0 xadvance=85 page=0 chnl=15
-char id=56 x=746 y=8 width=85 height=145 xoffset=0 yoffset=0 xadvance=85 page=0 chnl=15
-char id=57 x=839 y=8 width=85 height=145 xoffset=0 yoffset=0 xadvance=85 page=0 chnl=15
-char id=58 x=932 y=8 width=21 height=60 xoffset=8 yoffset=32 xadvance=37 page=0 chnl=15
+char id=32 x=0 y=0 width=0 height=0 xoffset=0 yoffset=0 xadvance=43 page=0 chnl=15
+char id=48 x=6 y=6 width=70 height=116 xoffset=8 yoffset=0 xadvance=86 page=0 chnl=15
+char id=49 x=82 y=6 width=70 height=116 xoffset=8 yoffset=0 xadvance=86 page=0 chnl=15
+char id=50 x=158 y=6 width=70 height=116 xoffset=8 yoffset=0 xadvance=86 page=0 chnl=15
+char id=51 x=234 y=6 width=70 height=116 xoffset=8 yoffset=0 xadvance=86 page=0 chnl=15
+char id=52 x=310 y=6 width=70 height=116 xoffset=8 yoffset=0 xadvance=86 page=0 chnl=15
+char id=53 x=386 y=6 width=70 height=116 xoffset=8 yoffset=0 xadvance=86 page=0 chnl=15
+char id=54 x=462 y=6 width=70 height=116 xoffset=8 yoffset=0 xadvance=86 page=0 chnl=15
+char id=55 x=538 y=6 width=70 height=116 xoffset=8 yoffset=0 xadvance=86 page=0 chnl=15
+char id=56 x=614 y=6 width=70 height=116 xoffset=8 yoffset=0 xadvance=86 page=0 chnl=15
+char id=57 x=690 y=6 width=70 height=116 xoffset=8 yoffset=0 xadvance=86 page=0 chnl=15
+char id=58 x=766 y=6 width=16 height=64 xoffset=9 yoffset=26 xadvance=34 page=0 chnl=15

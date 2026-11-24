@@ -1,0 +1,16 @@
+info face="f6_sirin_mip_mid" size=48 bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=4,4
+common lineHeight=48 base=48 scaleW=333 scaleH=56 pages=1 packed=0
+page id=0 file="f6_sirin_mip_mid.png"
+chars count=12
+char id=32 x=0 y=0 width=0 height=0 xoffset=0 yoffset=0 xadvance=18 page=0 chnl=15
+char id=48 x=4 y=4 width=29 height=48 xoffset=3 yoffset=0 xadvance=36 page=0 chnl=15
+char id=49 x=37 y=4 width=19 height=48 xoffset=8 yoffset=0 xadvance=36 page=0 chnl=15
+char id=50 x=60 y=4 width=29 height=48 xoffset=3 yoffset=0 xadvance=36 page=0 chnl=15
+char id=51 x=93 y=4 width=29 height=48 xoffset=3 yoffset=0 xadvance=36 page=0 chnl=15
+char id=52 x=126 y=4 width=29 height=48 xoffset=3 yoffset=0 xadvance=36 page=0 chnl=15
+char id=53 x=159 y=4 width=29 height=48 xoffset=3 yoffset=0 xadvance=36 page=0 chnl=15
+char id=54 x=192 y=4 width=29 height=48 xoffset=3 yoffset=0 xadvance=36 page=0 chnl=15
+char id=55 x=225 y=4 width=29 height=48 xoffset=3 yoffset=0 xadvance=36 page=0 chnl=15
+char id=56 x=258 y=4 width=29 height=48 xoffset=3 yoffset=0 xadvance=36 page=0 chnl=15
+char id=57 x=291 y=4 width=29 height=48 xoffset=3 yoffset=0 xadvance=36 page=0 chnl=15
+char id=58 x=324 y=4 width=5 height=26 xoffset=5 yoffset=11 xadvance=15 page=0 chnl=15

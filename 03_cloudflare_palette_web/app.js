@@ -14,7 +14,7 @@ const I18N = {
     fontLabel: "主时间字体 (F)",
     bgLabel: "水彩背景 (B)",
     arcLabel: "下半屏弧线 (A)",
-    f1: "F1 · 裂开 Mono", f2: "F2 · 明朝衬线", f3: "F3 · 硬派黑体 (矢量)", f4: "F4 · 八段数码管", f5: "F5 · 复古辉光管",
+    f1: "F1 · 裂开 Mono", f2: "F2 · 明朝衬线", f3: "F3 · 硬派黑体 (矢量)", f4: "F4 · 八段数码管", f5: "F5 · 复古辉光管", f6: "F6 · Sirin 优雅裂开",
     b0: "B0 · 自动 (天气/昼夜)", b1: "B1 · 晴 · 远山日轮", b2: "B2 · 云 · 浮世流云", b3: "B3 · 雾 · 水墨层峦",
     b4: "B4 · 雨 · 细雨涟漪", b5: "B5 · 雪 · 雪峰寒星", b6: "B6 · 夜 · 弦月眠猫",
     a1: "A1 · 下半屏细弧", a2: "A2 · 下半屏粗弧", a0: "A0 · 关闭弧线",
@@ -39,7 +39,7 @@ const I18N = {
     fontLabel: "Time Font (F)",
     bgLabel: "Background (B)",
     arcLabel: "Lower Arcs (A)",
-    f1: "F1 · Split Mono", f2: "F2 · Mincho Serif", f3: "F3 · Bold Vector", f4: "F4 · 7-Segment LCD", f5: "F5 · Nixie Tube",
+    f1: "F1 · Split Mono", f2: "F2 · Mincho Serif", f3: "F3 · Bold Vector", f4: "F4 · 7-Segment LCD", f5: "F5 · Nixie Tube", f6: "F6 · Sirin Stencil",
     b0: "B0 · Auto (Weather / Day-Night)", b1: "B1 · Clear · Fuji & Sun", b2: "B2 · Clouds · Ukiyo", b3: "B3 · Mist · Ink Peaks",
     b4: "B4 · Rain · Ripples", b5: "B5 · Snow · Frost Stars", b6: "B6 · Night · Crescent Cat",
     a1: "A1 · Lower Thin Arcs", a2: "A2 · Lower Bold Arcs", a0: "A0 · Off",
@@ -64,7 +64,7 @@ const I18N = {
     fontLabel: "時刻フォント (F)",
     bgLabel: "水彩背景 (B)",
     arcLabel: "下部アーク (A)",
-    f1: "F1 · スプリット Mono", f2: "F2 · 明朝体", f3: "F3 · ベクター太字", f4: "F4 · デジタル液晶", f5: "F5 · ニキシー管",
+    f1: "F1 · スプリット Mono", f2: "F2 · 明朝体", f3: "F3 · ベクター太字", f4: "F4 · デジタル液晶", f5: "F5 · ニキシー管", f6: "F6 · Sirin ステンシル",
     b0: "B0 · 自動 (天気/昼夜)", b1: "B1 · 晴 · 富士日輪", b2: "B2 · 曇 · 浮世雲", b3: "B3 · 霧 · 水墨山並",
     b4: "B4 · 雨 · 細雨波紋", b5: "B5 · 雪 · 雪峰寒星", b6: "B6 · 夜 · 三日月猫",
     a1: "A1 · 下部細アーク", a2: "A2 · 下部太アーク", a0: "A0 · 非表示",
@@ -194,7 +194,7 @@ function buildShortcode() {
 function parseShortcode(code) {
   const parts = code.trim().toUpperCase().split("-");
   if (parts.length < 10) return false;
-  if (/^F[1-5]$/.test(parts[0])) state.font = Number(parts[0][1]);
+  if (/^F[1-6]$/.test(parts[0])) state.font = Number(parts[0][1]);
   if (/^B[0-6]$/.test(parts[1])) state.bgMode = Number(parts[1][1]);
   if (/^A[0-2]$/.test(parts[2])) state.arcMode = Number(parts[2][1]);
   COLOR_SLOT_KEYS.forEach((k, idx) => {

@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "monkeyc",
+            "request": "launch",
+            "name": "Run Komorebi (fr965)",
+            "stopAtLaunch": false,
+            "device": "fr965"
+        },
+        {
+            "type": "monkeyc",
+            "request": "launch",
+            "name": "Run Komorebi (fenix7 MIP)",
+            "stopAtLaunch": false,
+            "device": "fenix7"
+        }
+    ]
+}

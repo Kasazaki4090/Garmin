@@ -33,30 +33,31 @@ class SegmentClock {
         var s1 = (clockTime.sec / 10).toNumber();
         var s2 = clockTime.sec % 10;
 
-        var digitH = (h * 0.30).toNumber();
-        var digitW = (digitH * 0.48).toNumber();
-        var thick = (digitH * 0.115).toNumber();
+        // 与位图字体 (F1/F2/F4/F5/F6) 严格对齐相同字高与总宽 (454屏下 digitH=116, minH=84, secH=24)
+        var digitH = (h * 0.255).toNumber();
+        var digitW = (w * 0.155).toNumber();
+        var thick = (digitH * 0.12).toNumber();
 
-        var minH = (digitH * 0.60).toNumber();
-        var minW = (minH * 0.50).toNumber();
-        var minT = (minH * 0.12).toNumber();
+        var minH = (h * 0.185).toNumber();
+        var minW = (w * 0.115).toNumber();
+        var minT = (minH * 0.125).toNumber();
 
-        var secH = (digitH * 0.27).toNumber();
-        var secW = (secH * 0.54).toNumber();
+        var secH = (h * 0.053).toNumber();
+        var secW = (w * 0.036).toNumber();
         var secT = (secH * 0.15).toNumber();
         if (secT < 2) { secT = 2; }
 
-        var hGap = (digitW * 0.22).toNumber();
-        var colonW = (digitW * 0.24).toNumber();
-        var minGap = (minW * 0.25).toNumber();
-        var secGap = (secW * 0.28).toNumber();
+        var hGap = (w * 0.025).toNumber();
+        var colonW = (w * 0.055).toNumber();
+        var minGap = (w * 0.022).toNumber();
+        var secGap = (w * 0.010).toNumber();
 
-        var advH1 = getAdvance(h1, digitW);
-        var advH2 = getAdvance(h2, digitW);
-        var advM1 = getAdvance(m1, minW);
-        var advM2 = getAdvance(m2, minW);
-        var advS1 = getAdvance(s1, secW);
-        var advS2 = getAdvance(s2, secW);
+        var advH1 = digitW;
+        var advH2 = digitW;
+        var advM1 = minW;
+        var advM2 = minW;
+        var advS1 = secW;
+        var advS2 = secW;
 
         var minTotalW = advM1 + minGap + advM2;
         var secTotalW = advS1 + secGap + advS2;
@@ -64,7 +65,7 @@ class SegmentClock {
 
         var totalW = advH1 + hGap + advH2 + hGap + colonW + hGap + rightColW;
         var startX = ((w - totalW) / 2).toNumber();
-        var topY = (h * (theme.showWeatherCond ? 0.255 : 0.23)).toNumber();
+        var topY = (h * (theme.showWeatherCond ? 0.232 : 0.212)).toNumber();
 
         var x = startX;
         drawDigit(dc, x, topY, digitW, digitH, thick, h1, theme.colorHour);

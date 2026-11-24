@@ -1,16 +1,16 @@
-info face="KomorebiNixieMono" size=52 bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=8,8
-common lineHeight=52 base=52 scaleW=435 scaleH=76 pages=1 packed=0
+info face="f5_nixie_mip_mid" size=48 bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=4,4
+common lineHeight=48 base=48 scaleW=333 scaleH=56 pages=1 packed=0
 page id=0 file="f5_nixie_mip_mid.png"
 chars count=12
-char id=32 x=0 y=0 width=0 height=0 xoffset=0 yoffset=0 xadvance=19 page=0 chnl=15
-char id=48 x=8 y=8 width=34 height=60 xoffset=2 yoffset=0 xadvance=39 page=0 chnl=15
-char id=49 x=50 y=8 width=28 height=60 xoffset=5 yoffset=0 xadvance=39 page=0 chnl=15
-char id=50 x=86 y=8 width=34 height=60 xoffset=2 yoffset=0 xadvance=39 page=0 chnl=15
-char id=51 x=128 y=8 width=34 height=60 xoffset=2 yoffset=0 xadvance=39 page=0 chnl=15
-char id=52 x=170 y=8 width=34 height=60 xoffset=2 yoffset=0 xadvance=39 page=0 chnl=15
-char id=53 x=212 y=8 width=34 height=60 xoffset=2 yoffset=0 xadvance=39 page=0 chnl=15
-char id=54 x=254 y=8 width=34 height=60 xoffset=2 yoffset=0 xadvance=39 page=0 chnl=15
-char id=55 x=296 y=8 width=32 height=60 xoffset=3 yoffset=0 xadvance=39 page=0 chnl=15
-char id=56 x=336 y=8 width=34 height=60 xoffset=2 yoffset=0 xadvance=39 page=0 chnl=15
-char id=57 x=378 y=8 width=34 height=60 xoffset=2 yoffset=0 xadvance=39 page=0 chnl=15
-char id=58 x=420 y=8 width=7 height=26 xoffset=5 yoffset=13 xadvance=17 page=0 chnl=15
+char id=32 x=0 y=0 width=0 height=0 xoffset=0 yoffset=0 xadvance=18 page=0 chnl=15
+char id=48 x=4 y=4 width=29 height=48 xoffset=3 yoffset=0 xadvance=36 page=0 chnl=15
+char id=49 x=37 y=4 width=16 height=48 xoffset=10 yoffset=0 xadvance=36 page=0 chnl=15
+char id=50 x=57 y=4 width=29 height=48 xoffset=3 yoffset=0 xadvance=36 page=0 chnl=15
+char id=51 x=90 y=4 width=29 height=48 xoffset=3 yoffset=0 xadvance=36 page=0 chnl=15
+char id=52 x=123 y=4 width=29 height=48 xoffset=3 yoffset=0 xadvance=36 page=0 chnl=15
+char id=53 x=156 y=4 width=29 height=48 xoffset=3 yoffset=0 xadvance=36 page=0 chnl=15
+char id=54 x=189 y=4 width=29 height=48 xoffset=3 yoffset=0 xadvance=36 page=0 chnl=15
+char id=55 x=222 y=4 width=29 height=48 xoffset=3 yoffset=0 xadvance=36 page=0 chnl=15
+char id=56 x=255 y=4 width=29 height=48 xoffset=3 yoffset=0 xadvance=36 page=0 chnl=15
+char id=57 x=288 y=4 width=29 height=48 xoffset=3 yoffset=0 xadvance=36 page=0 chnl=15
+char id=58 x=321 y=4 width=8 height=26 xoffset=3 yoffset=11 xadvance=15 page=0 chnl=15

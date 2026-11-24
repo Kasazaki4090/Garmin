@@ -1,6 +1,7 @@
 {
     "monkeyC.developerKeyPath": "d:\\Garmin\\developer_key.der",
     "monkeyC.compilerWarnings": true,
+    "monkeyC.jungleFiles": "Komorebi/01_watchface_app/monkey.jungle",
     "java.configuration.runtimes": [
         {
             "name": "JavaSE-17",

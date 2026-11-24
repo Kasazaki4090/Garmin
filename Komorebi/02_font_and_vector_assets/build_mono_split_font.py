@@ -1,70 +1,42 @@
 import os
-import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
-# Use condensed heavy sans so digits are HUGE vertically while compact horizontally (fits inside left/right arcs!)
-FONT_PATH = r"C:\Users\SHIZUKI\AppData\Local\Microsoft\Windows\Fonts\兰亭特黑长 GBK.TTF"
+FONTS_RAW = r"D:\Garmin\Komorebi\02_font_and_vector_assets\fonts_raw"
 OUT_DIR = r"D:\Garmin\Komorebi\01_watchface_app\resources\fonts"
 
 CHARS = " 0123456789:"
 
-# Balanced proportions so HH doesn't overpower MM, leaves left/right arc breathing room & keeps cat clear:
-# AMOLED 454x454: HH=108 (~124px), MM=84 (~96px), SS=21 (~24px, exact 72:18 = 4:1!)
-# MIP 260x260:    HH=62  (~71px),  MM=48 (~55px), SS=12 (~14px, exact 72:18 = 4:1!)
-TIERS = [
-    ("f1_split_big", 108),
-    ("f1_split_mid", 84),
-    ("f1_split_mini", 21),
-    ("f1_split_mip_big", 62),
-    ("f1_split_mip_mid", 48),
-    ("f1_split_mip_mini", 12),
+FAMILIES = [
+    (
+        "f1_split",
+        os.path.join(FONTS_RAW, "SairaStencilOne-Regular.ttf"),
+        [("big", 106, False), ("mid", 82, False), ("mini", 21, False),
+         ("mip_big", 60, True), ("mip_mid", 46, True), ("mip_mini", 12, True)],
+    ),
+    (
+        "f6_sirin",
+        os.path.join(FONTS_RAW, "SirinStencil-Regular.ttf"),
+        [("big", 112, False), ("mid", 86, False), ("mini", 22, False),
+         ("mip_big", 64, True), ("mip_mid", 48, True), ("mip_mini", 13, True)],
+    ),
 ]
 
 
-def cut_ios_stencil_split(g_img: Image.Image, ch: str) -> Image.Image:
-    """Slice a crisp iOS 16/17 lockscreen-style diagonal stencil gap through the digit."""
-    if ch not in "0123456789":
-        return g_img
-
-    w, h = g_img.size
-    if w < 8 or h < 12:
-        return g_img
-
-    gap_half = max(1.2, h * 0.025)
-    mask = Image.new("L", (w, h), 255)
-    md = ImageDraw.Draw(mask)
-
-    cy = h * 0.52
-    dy = h * 0.17
-    pts = [
-        (0, cy + dy - gap_half),
-        (w, cy - dy - gap_half),
-        (w, cy - dy + gap_half),
-        (0, cy + dy + gap_half),
-    ]
-    md.polygon(pts, fill=0)
-
-    r, g, b, a = g_img.split()
-    a_np = np.array(a, dtype=np.float32) * (np.array(mask, dtype=np.float32) / 255.0)
-    new_a = Image.fromarray(a_np.astype(np.uint8), mode="L")
-    return Image.merge("RGBA", (r, g, b, new_a))
-
-
-def build_mono_tier(font_id: str, target_h: int):
-    font = ImageFont.truetype(FONT_PATH, size=int(target_h * 1.28), index=0)
+def build_mono_tier(font_path: str, font_id: str, target_h: int, is_mip: bool):
+    ss = 4
+    font = ImageFont.truetype(font_path, size=int(target_h * 1.30 * ss))
 
     z_bbox = font.getbbox("0")
     ink_top = z_bbox[1]
     ink_bottom = z_bbox[3]
-    line_height = max(1, ink_bottom - ink_top)
+    line_height = max(1, round((ink_bottom - ink_top) / ss))
 
-    digit_widths = [font.getbbox(d)[2] - font.getbbox(d)[0] for d in "0123456789"]
-    max_digit_w = max(digit_widths)
-    # Strict MONOSPACE advance across 0..9, compact enough to leave room for left/right arcs
-    mono_adv = max(int(max_digit_w * 1.08), max_digit_w + 6)
+    digit_widths = [(font.getbbox(d)[2] - font.getbbox(d)[0]) / ss for d in "0123456789"]
+    max_digit_w = int(round(max(digit_widths)))
+    mono_adv = max(int(max_digit_w * 1.06), max_digit_w + 4)
 
     glyphs = []
-    pad = 8
+    pad = 4 if is_mip else 6
     cur_x = pad
 
     for ch in CHARS:
@@ -80,25 +52,30 @@ def build_mono_tier(font_id: str, target_h: int):
         gw = max(1, right - left)
         gh = max(1, bottom - top)
 
-        g_img = Image.new("RGBA", (gw + 4, gh + 4), (255, 255, 255, 0))
-        g_draw = ImageDraw.Draw(g_img)
-        g_draw.text((-left + 2, -top + 2), ch, font=font, fill=(255, 255, 255, 255))
+        mask_hi = Image.new("L", (gw + 16, gh + 16), 0)
+        md = ImageDraw.Draw(mask_hi)
+        md.text((-left + 8, -top + 8), ch, font=font, fill=255)
 
-        abbox = g_img.getbbox()
+        abbox = mask_hi.getbbox()
         if abbox:
-            g_img = g_img.crop(abbox)
-            g_img = cut_ios_stencil_split(g_img, ch)
-            cw, ch_px = g_img.size
-            yoff = (top + abbox[1] - 2) - ink_top
+            mask_hi = mask_hi.crop(abbox)
+            cw = max(1, round(mask_hi.width / ss))
+            ch_px = max(1, round(mask_hi.height / ss))
+            mask_lo = mask_hi.resize((cw, ch_px), Image.Resampling.LANCZOS)
+            if is_mip and target_h <= 24:
+                mask_lo = mask_lo.point(lambda v: 255 if v >= 110 else 0)
+            g_img = Image.new("RGBA", (cw, ch_px), (255, 255, 255, 255))
+            g_img.putalpha(mask_lo)
+            yoff = round(((top + abbox[1] - 8) - ink_top) / ss)
         else:
             cw, ch_px = 1, 1
+            g_img = Image.new("RGBA", (1, 1), (255, 255, 255, 0))
             yoff = 0
 
         if ch == ":":
-            xadv = max(cw + 8, int(mono_adv * 0.44))
+            xadv = max(cw + 6, int(mono_adv * 0.40))
             xoff = (xadv - cw) // 2
         else:
-            # STRICT MONO: every digit centered inside identical mono_adv slot
             xadv = mono_adv
             xoff = (mono_adv - cw) // 2
 
@@ -127,7 +104,7 @@ def build_mono_tier(font_id: str, target_h: int):
     atlas.save(png_path, optimize=True)
 
     lines = [
-        f'info face="KomorebiSplitMono" size={target_h} bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing={pad},{pad}',
+        f'info face="{font_id}" size={target_h} bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing={pad},{pad}',
         f'common lineHeight={line_height} base={line_height} scaleW={atlas_w} scaleH={atlas_h} pages=1 packed=0',
         f'page id=0 file="{png_name}"',
         f'chars count={len(glyphs)}'
@@ -147,8 +124,9 @@ def build_mono_tier(font_id: str, target_h: int):
 
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
-    for fid, h in TIERS:
-        build_mono_tier(fid, h)
+    for prefix, font_path, tiers in FAMILIES:
+        for suffix, h, is_mip in tiers:
+            build_mono_tier(font_path, f"{prefix}_{suffix}", h, is_mip)
 
 
 if __name__ == "__main__":

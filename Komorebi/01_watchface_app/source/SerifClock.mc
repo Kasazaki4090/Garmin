@@ -47,13 +47,10 @@ class SerifClock {
         var gap = (w * 0.018).toNumber();
 
         var totalW = hourW + gap + colonW + gap + minW;
-        if (totalW > w * 0.88) {
-            return false;
-        }
 
         // 布局居中偏上，留足顶部 2~3 行信息与下半屏数据空间
         var startX = ((w - totalW) / 2).toNumber();
-        var topY = (h * (theme.showWeatherCond ? 0.245 : 0.215)).toNumber();
+        var topY = (h * (theme.showWeatherCond ? 0.232 : 0.212)).toNumber();
         var bigCenterY = (topY + digitH / 2).toNumber();
 
         var colonX = startX + hourW + gap;
@@ -89,7 +86,21 @@ class SerifClock {
     private static function loadTiers(h as Number, fontId as Number) as Array {
         try {
             if (fontId == 1) {
+                if (fontId == 6) {
                 if (h >= 380) {
+                    return [
+                        Application.loadResource(Rez.Fonts.f6_sirin_big),
+                        Application.loadResource(Rez.Fonts.f6_sirin_mid),
+                        Application.loadResource(Rez.Fonts.f6_sirin_mini)
+                    ];
+                }
+                return [
+                    Application.loadResource(Rez.Fonts.f6_sirin_mip_big),
+                    Application.loadResource(Rez.Fonts.f6_sirin_mip_mid),
+                    Application.loadResource(Rez.Fonts.f6_sirin_mip_mini)
+                ];
+            }
+            if (h >= 380) {
                     return [
                         Application.loadResource(Rez.Fonts.f1_split_big),
                         Application.loadResource(Rez.Fonts.f1_split_mid),
@@ -103,7 +114,21 @@ class SerifClock {
                 ];
             }
             if (fontId == 4) {
+                if (fontId == 6) {
                 if (h >= 380) {
+                    return [
+                        Application.loadResource(Rez.Fonts.f6_sirin_big),
+                        Application.loadResource(Rez.Fonts.f6_sirin_mid),
+                        Application.loadResource(Rez.Fonts.f6_sirin_mini)
+                    ];
+                }
+                return [
+                    Application.loadResource(Rez.Fonts.f6_sirin_mip_big),
+                    Application.loadResource(Rez.Fonts.f6_sirin_mip_mid),
+                    Application.loadResource(Rez.Fonts.f6_sirin_mip_mini)
+                ];
+            }
+            if (h >= 380) {
                     return [
                         Application.loadResource(Rez.Fonts.f4_lcd_big),
                         Application.loadResource(Rez.Fonts.f4_lcd_mid),
@@ -117,7 +142,21 @@ class SerifClock {
                 ];
             }
             if (fontId == 5) {
+                if (fontId == 6) {
                 if (h >= 380) {
+                    return [
+                        Application.loadResource(Rez.Fonts.f6_sirin_big),
+                        Application.loadResource(Rez.Fonts.f6_sirin_mid),
+                        Application.loadResource(Rez.Fonts.f6_sirin_mini)
+                    ];
+                }
+                return [
+                    Application.loadResource(Rez.Fonts.f6_sirin_mip_big),
+                    Application.loadResource(Rez.Fonts.f6_sirin_mip_mid),
+                    Application.loadResource(Rez.Fonts.f6_sirin_mip_mini)
+                ];
+            }
+            if (h >= 380) {
                     return [
                         Application.loadResource(Rez.Fonts.f5_nixie_big),
                         Application.loadResource(Rez.Fonts.f5_nixie_mid),
@@ -128,6 +167,20 @@ class SerifClock {
                     Application.loadResource(Rez.Fonts.f5_nixie_mip_big),
                     Application.loadResource(Rez.Fonts.f5_nixie_mip_mid),
                     Application.loadResource(Rez.Fonts.f5_nixie_mip_mini)
+                ];
+            }
+            if (fontId == 6) {
+                if (h >= 380) {
+                    return [
+                        Application.loadResource(Rez.Fonts.f6_sirin_big),
+                        Application.loadResource(Rez.Fonts.f6_sirin_mid),
+                        Application.loadResource(Rez.Fonts.f6_sirin_mini)
+                    ];
+                }
+                return [
+                    Application.loadResource(Rez.Fonts.f6_sirin_mip_big),
+                    Application.loadResource(Rez.Fonts.f6_sirin_mip_mid),
+                    Application.loadResource(Rez.Fonts.f6_sirin_mip_mini)
                 ];
             }
             if (h >= 380) {
